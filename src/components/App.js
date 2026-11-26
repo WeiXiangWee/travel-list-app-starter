@@ -10,9 +10,22 @@ function Logo() {
   return <h1>My Travel List</h1>;
 }
 
-function Form() {
+function Form({ handleAddItem }) {
   function handleSubmit(event) {
     event.preventDefault(); //used to prevent the reloading of the entire page
+    if (!description) return;
+
+    const newItem = {
+      id: Date.now(),
+      description,
+      quantity,
+      packed: false,
+    };
+
+    handleAddItem(newItem);
+
+    setDescription("");
+    setQuantity(1);
   }
 
   const [description, setDescription] = useState("");
@@ -52,11 +65,11 @@ function Item({ item }) {
   );
 }
 
-function PackingList() {
+function PackingList({ items }) {
   return (
     <div className="list">
       <ul>
-        {initialItems.map((item) => (
+        {items.map((item) => (
           <Item key={item.id} item={item} />
         ))}
       </ul>
@@ -73,11 +86,17 @@ function Stats() {
 }
 
 function App() {
+  const [items, setItems] = useState([]);
+
+  function handleAddItems(item) {
+    setItems((prevItems) => [...prevItems, item]);
+  }
+
   return (
     <div className="app">
       <Logo />
-      <Form />
-      <PackingList />
+      <Form handleAddItem={handleAddItems} />
+      <PackingList items={items} />
       <Stats />
     </div>
   );
