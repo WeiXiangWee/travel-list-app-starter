@@ -1,10 +1,10 @@
 import { useState } from "react";
 
 // Initial packing items
-const initialItems = [
-  { id: 1, description: "Shirt", quantity: 5, packed: false },
-  { id: 2, description: "Pants", quantity: 2, packed: true },
-];
+// const initialItems = [
+//   { id: 1, description: "Shirt", quantity: 5, packed: false },
+//   { id: 2, description: "Pants", quantity: 2, packed: true },
+// ];
 
 function Logo() {
   return <h1>My Travel List</h1>;
